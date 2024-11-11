@@ -1,0 +1,27 @@
+schema: workflow/2022.04
+name: Convert to PDF
+settings:
+  error_notification: true
+  lambda_timeout: 45
+triggers:
+- id: dc_lVuOgdj
+steps:
+- namespace: check_path_and_ext
+  runtime: nodejs20.x
+  uses: "./check_path_and_ext/entry.js"
+- namespace: get_access_token
+  runtime: nodejs20.x
+  uses: "./get_access_token/entry.js"
+- namespace: get_upload_link
+  runtime: nodejs20.x
+  uses: "./get_upload_link/entry.js"
+  props:
+    dropbox:
+      authProvisionId: apn_LMho37
+- namespace: convert_to_pdf
+  runtime: nodejs20.x
+  uses: "./convert_to_pdf/entry.js"
+- namespace: check_result
+  runtime: nodejs20.x
+  uses: "./check_result/entry.js"
+
